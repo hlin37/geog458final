@@ -143,8 +143,8 @@
 
                 // found the the Protocols of all the attacks in the displayed map view.        
                 //protocols = calProtocols(aws_honeypot, map.getBounds());
-                
-                protocols = calProtocols(attacks, map.getBounds());
+                protocols = {'TCP':3,'ICMP':7, 'UDP':5}
+                //protocols = calProtocols(attacks, map.getBounds());
 
                 x = Object.keys(protocols);
                 x.unshift("proto")
