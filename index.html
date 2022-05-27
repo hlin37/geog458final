@@ -140,8 +140,28 @@
                         }
                     );
                 });
+            });
 
-                // found the the Protocols of all the attacks in the displayed map view.        
+            map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
+                protocols = calProtocols(attacks, map.getBounds());
+                //magnitudes = calEarthquakes(earthquakes, map.getBounds());
+                //numEarthquakes = magnitudes[4] + magnitudes[5] + magnitudes[6];
+                //document.getElementById("earthquake-count").innerHTML = numEarthquakes;
+
+
+                x = Object.keys(protocols);
+                x.unshift("proto")
+                y = Object.values(protocols);
+                y.unshift("#")
+
+                // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
+                protocolsChart.load({
+                    columns: [x, y]
+                });
+            });
+    }
+
+    // found the the Protocols of all the attacks in the displayed map view.        
                 //protocols = calProtocols(aws_honeypot, map.getBounds());
                 protocols = {'TCP':3,'ICMP':7, 'UDP':5}
                 //protocols = calProtocols(attacks, map.getBounds());
@@ -189,26 +209,6 @@
                     },
                     bindto: "#protocols-chart" //bind the chart to the place holder element "earthquake-chart".
                 });
-            });
-
-            map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
-                protocols = calProtocols(attacks, map.getBounds());
-                //magnitudes = calEarthquakes(earthquakes, map.getBounds());
-                //numEarthquakes = magnitudes[4] + magnitudes[5] + magnitudes[6];
-                //document.getElementById("earthquake-count").innerHTML = numEarthquakes;
-
-
-                x = Object.keys(protocols);
-                x.unshift("proto")
-                y = Object.values(protocols);
-                y.unshift("#")
-
-                // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
-                protocolsChart.load({
-                    columns: [x, y]
-                });
-            });
-    }
 
     // call the function
     geojsonFetch();
