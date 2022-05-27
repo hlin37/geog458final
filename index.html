@@ -69,6 +69,9 @@
         const protos = ["UDP", "TCP", "ICMP"],
             colors = ['rgb(181,126,220)', 'rgb(103,169,207)', 'rgb(1,108,89)']
 
+        let protocolChart = null,
+            magnitude = {};
+
         async function geojsonFetch() {
 
             // Await operator is used to wait for a promise. 
@@ -195,28 +198,28 @@
                     columns: [x, y]
                 });
             });
+    }
+
+    // call the function
+    geojsonFetch();
+    
+    function calProtocols(currentProtocols, currentMapBounds) {
+
+        let protocolClasses = {
+            "TCP": 0,
+            "UDP": 0,
+            "ICMP": 0
+        };
+        currentProtocols.features.forEach(function (d) { // d indicate a feature of currentProtocols
+            // contains is a spatial operation to determine whether a point within a bbox or not.
+            if (currentMapBounds.contains(d.geometry.coordinates)) {
+                // if within, the # of the earthquake in the same magnitude increase by 1.
+                protocolClasses[d.properties.proto] += 1;
             }
 
-        // call the function
-        geojsonFetch();
-        
-        function calProtocols(currentProtocols, currentMapBounds) {
-
-            let protocolClasses = {
-                "TCP": 0,
-                "UDP": 0,
-                "ICMP": 0
-            };
-            currentProtocols.features.forEach(function (d) { // d indicate a feature of currentProtocols
-                // contains is a spatial operation to determine whether a point within a bbox or not.
-                if (currentMapBounds.contains(d.geometry.coordinates)) {
-                    // if within, the # of the earthquake in the same magnitude increase by 1.
-                    protocolClasses[d.properties.proto] += 1;
-                }
-
-            })
-            return protocolClasses;
-        }
+        })
+        return protocolClasses;
+    }
     </script>
 
 </body>
