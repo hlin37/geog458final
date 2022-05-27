@@ -145,6 +145,11 @@
                 //protocols = calProtocols(aws_honeypot, map.getBounds());
                 var protocols = {'TCP':3,'ICMP':7, 'UDP':5}
 
+                x = Object.keys(protocols);
+                x.unshift("proto")
+                y = Object.values(protocols);
+                y.unshift("#")
+
                 // enumerate the number of earthquakes.
                 // numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
 
