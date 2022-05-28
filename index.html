@@ -140,96 +140,115 @@
                         }
                     );
                 });
-            });
 
-            map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
+                // found the the Protocols of all the attacks in the displayed map view. 
+                // ***** COMMENT BY STEVEN: Here you should use `attacks` as it is the variable 
+                // which we stored the geojson data in at the beginning of the geojsonFetch() function
+
                 protocols = calProtocols(attacks, map.getBounds());
-                //magnitudes = calEarthquakes(earthquakes, map.getBounds());
-                //numEarthquakes = magnitudes[4] + magnitudes[5] + magnitudes[6];
-                //document.getElementById("earthquake-count").innerHTML = numEarthquakes;
-
-
-                x = Object.keys(protocols);
-                x.unshift("proto")
-                y = Object.values(protocols);
-                y.unshift("#")
-
-                // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
-                protocolsChart.load({
-                    columns: [x, y]
-                });
-            });
-    }
-
-    // found the the Protocols of all the attacks in the displayed map view.        
-                //protocols = calProtocols(aws_honeypot, map.getBounds());
-                protocols = {'TCP':3,'ICMP':7, 'UDP':5}
-                //protocols = calProtocols(attacks, map.getBounds());
-
-                x = Object.keys(protocols);
-                x.unshift("proto")
-                y = Object.values(protocols);
-                y.unshift("#")
+                // var protocols = {
+                //     'TCP': 3,
+                //     'ICMP': 7,
+                //     'UDP': 5
+                // }
 
                 // enumerate the number of earthquakes.
-                // numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
+                //numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
 
+
+                //***** COMMENTS BY STEVEN: This `earthquake-count` is referring to the HTML element
+                //***** with the id `earthquake-count` in the example webpage.
+                //***** `document.getElementById()` is a built-in basic JS function to get specific HTML elements.
+                //***** There are other similar functions such as `document.getElementsByClass()`
                 // // update the content of the element earthquake-count.
                 // document.getElementById("earthquake-count").innerHTML = numEarthquakes;
 
                 // add "proot" to the beginning of the x variable - the magnitude, and "#" to the beginning of the y variable - the number of earthquake of similar magnitude.
+                x = Object.keys(protocols);
+                x.unshift("proto")
+                y = Object.values(protocols);
+                y.unshift("#")
 
-                protocolsChart = c3.generate({
-                    size: {
-                        height: 350,
-                        width: 460
-                    },
+                chart = c3.generate({
+                    bindto: '#protocols-chart',    //***** COMMENTS BY STEVEN: the `#earthquake-chart` here is similar to 
+                                                    //***** a css selector, which will select the HTML tag with the id 'earthquake-chart'.
+                                                    //***** This will link the c3 chart `chart` to the specified HTML element.
                     data: {
-                        x: 'proto',
-                        columns: [x, y],
-                        type: 'bar', // make a bar chart.
-                        colors: {
-                            '#': (d) => {
-                                return colors[d["x"]];
-                            }
-                        }
+                        x: 'proto',     //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
+                        columns: [
+                            // ['Protocol', 'TCP', 'UDP', 'ICMP'],
+                            // ['Values', 49, 76, 253]
+                            x,y
+                        ],
+                        type: 'bar'
                     },
                     axis: {
-                        x: { //magnitude
-                            type: 'category',
-                        },
-                        y: { //count
-                            tick: {
-                                values: [10, 20, 30, 40]
+                        y: {
+                            label: {
+                                text: 'Number of Attacks',
+                                position: 'outer-middle'
                             }
+                        },
+                        x: {
+                            type: 'category',
+                        }
+                    },
+                    bar: {
+                        width: {
+                            ratio: 0.5
                         }
                     },
                     legend: {
                         show: false
-                    },
-                    bindto: "#protocols-chart" //bind the chart to the place holder element "earthquake-chart".
+                    }
                 });
+            });
 
-    // call the function
-    geojsonFetch();
-    
-    function calProtocols(currentProtocols, currentMapBounds) {
+            //load data to the map as new layers.
+            //map.on('load', function loadingData() {
+            map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
+                attackTypes = calProtocols(attacks, map.getBounds());
+                numAttacks = attackTypes[4] + attackTypes[5] + attackTypes[6];
 
-        let protocolClasses = {
-            "TCP": 0,
-            "UDP": 0,
-            "ICMP": 0
-        };
-        currentProtocols.features.forEach(function (d) { // d indicate a feature of currentProtocols
-            // contains is a spatial operation to determine whether a point within a bbox or not.
-            if (currentMapBounds.contains(d.geometry.coordinates)) {
-                // if within, the # of the earthquake in the same magnitude increase by 1.
-                protocolClasses[d.properties.proto] += 1;
-            }
+                x = Object.keys(attackTypes);
+                x.unshift("mag")
+                y = Object.values(attackTypes);
+                y.unshift("#")
 
-        })
-        return protocolClasses;
+                // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
+                //***** COMMENT BY STEVEN: the `.load` function will reload the chart based on the new values
+                chart.load({
+                    columns: [x, y]
+                });
+        });
     }
+
+        // call the function
+        geojsonFetch();
+
+        function calProtocols(currentProtocols, currentMapBounds) {
+
+            let protocolClasses = {
+                "TCP": 0,
+                "UDP": 0,
+                "ICMP": 0
+            };
+            currentProtocols.features.forEach(function (d) { // d indicate a feature of currentProtocols
+                //***** COMMENT BY STEVEN: Here I added another if statement to detect if there is a feature
+                // without coordinates definition. If so, ignore it, since the feature in the geojson data
+                // will not appear on your map (because it has no coodinates)
+                if (d.geometry != null) {
+                    // contains is a spatial operation to determine whether a point within a bbox or not.
+                    if (currentMapBounds.contains(d.geometry.coordinates)) {
+                        // if within, the # of the earthquake in the same magnitude increase by 1.
+                        protocolClasses[d.properties.proto] += 1;
+                    }
+                }
+
+            })
+            return protocolClasses;
+        }
+
     </script>
 
 </body>
