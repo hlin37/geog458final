@@ -146,7 +146,7 @@
                 // which we stored the geojson data in at the beginning of the geojsonFetch() function
 
                 protocols = calProtocols(attacks, map.getBounds());
-                console.log(protocols["TCP"])
+                console.log(protocols["TCP"]);
                 // var protocols = {
                 //     'TCP': 3,
                 //     'ICMP': 7,
@@ -245,6 +245,8 @@
                 // without coordinates definition. If so, ignore it, since the feature in the geojson data
                 // will not appear on your map (because it has no coodinates)
                 if (d.geometry != null) {
+                    console.log(d.geometry.coordinates[0]);
+                    console.log(d.geometry.coordinates[1]);
                     // contains is a spatial operation to determine whether a point within a bbox or not.
                     if (currentMapBounds.contains(d.geometry.coordinates)) {
                         // if within, the # of the earthquake in the same magnitude increase by 1.
