@@ -32,7 +32,7 @@
         }
 
         #protocols-chart {
-            top: 100px;
+            top: 20px;
         }
 
     </style>
@@ -74,7 +74,7 @@
         const protos = ["UDP", "TCP", "ICMP"],
             colors = ['rgb(181,126,220)', 'rgb(103,169,207)', 'rgb(1,108,89)']
 
-        let protocolChart = null,
+        let chart = null,
             magnitude = {};
 
         async function geojsonFetch() {
