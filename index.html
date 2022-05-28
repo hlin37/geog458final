@@ -175,9 +175,6 @@
                         width: 460
                     },
 
-                    bindto: '#protocols-chart',    //***** COMMENTS BY STEVEN: the `#earthquake-chart` here is similar to 
-                                                    //***** a css selector, which will select the HTML tag with the id 'earthquake-chart'.
-                                                    //***** This will link the c3 chart `chart` to the specified HTML element.
                     data: {
                         x: 'proto',     //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
                         columns: [x, y],
@@ -206,7 +203,10 @@
                     },
                     legend: {
                         show: false
-                    }
+                    },
+
+                    bindto: '#protocols-chart'
+                    
                 });
             });
 
