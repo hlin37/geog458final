@@ -246,8 +246,6 @@
                 // will not appear on your map (because it has no coodinates)
                 if (d.geometry != null) {
                     if (d.geometry.coordinates[1] > -90 && d.geometry.coordinates[1] < 90) {
-                        console.log(d.geometry.coordinates[0]);
-                        console.log(d.geometry.coordinates[1]);
                         if (currentMapBounds.contains(d.geometry.coordinates)) {
                         // if within, the # of the earthquake in the same magnitude increase by 1.
                         protocolClasses[d.properties.proto] += 1;
