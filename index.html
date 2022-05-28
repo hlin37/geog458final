@@ -92,7 +92,7 @@
                 // add a source of the data and then add the layer out of the source
                 map.addSource('aws_honeypot', {
                     type: 'geojson',
-                    data: 'assets/aws_honeypot.geojson'
+                    data: attacks
                     // cluster: true,
                     // clusterMaxZoom: 14,
                     // clusterRadius: 50
@@ -122,25 +122,24 @@
                     }
                 });
 
+                // // click on tree to view cases in a popup
+                // map.on('click', 'clusters', (e) => {
+                //     const features = map.queryRenderedFeatures(e.point, {
+                //         layers: ['clusters']
+                //     });
+                //     const clusterId = features[0].properties.cluster_id;
+                //     map.getSource('earthquakes').getClusterExpansionZoom(
+                //         clusterId,
+                //         (err, zoom) => {
+                //             if (err) return;
 
-                // click on tree to view cases in a popup
-                map.on('click', 'clusters', (e) => {
-                    const features = map.queryRenderedFeatures(e.point, {
-                        layers: ['clusters']
-                    });
-                    const clusterId = features[0].properties.cluster_id;
-                    map.getSource('earthquakes').getClusterExpansionZoom(
-                        clusterId,
-                        (err, zoom) => {
-                            if (err) return;
-
-                            map.easeTo({
-                                center: features[0].geometry.coordinates,
-                                zoom: zoom
-                            });
-                        }
-                    );
-                });
+                //             map.easeTo({
+                //                 center: features[0].geometry.coordinates,
+                //                 zoom: zoom
+                //             });
+                //         }
+                //     );
+                // });
 
                 // found the the Protocols of all the attacks in the displayed map view. 
                 // ***** COMMENT BY STEVEN: Here you should use `attacks` as it is the variable 
@@ -171,16 +170,17 @@
                 y.unshift("#")
 
                 chart = c3.generate({
+                    size: {
+                        height: 350,
+                        width: 460
+                    },
+
                     bindto: '#protocols-chart',    //***** COMMENTS BY STEVEN: the `#earthquake-chart` here is similar to 
                                                     //***** a css selector, which will select the HTML tag with the id 'earthquake-chart'.
                                                     //***** This will link the c3 chart `chart` to the specified HTML element.
                     data: {
                         x: 'proto',     //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
-                        columns: [
-                            // ['Protocol', 'TCP', 'UDP', 'ICMP'],
-                            // ['Values', 49, 76, 253]
-                            x,y
-                        ],
+                        columns: [x, y],
                         type: 'bar'
                     },
                     axis: {
@@ -188,12 +188,17 @@
                             label: {
                                 text: 'Number of Attacks',
                                 position: 'outer-middle'
-                            }
+                            },
+
+                            max: 1000,
+                            min: 0,
                         },
+
                         x: {
                             type: 'category',
                         }
                     },
+                    
                     bar: {
                         width: {
                             ratio: 0.5
