@@ -258,16 +258,21 @@
             //load data to the map as new layers.
             //map.on('load', function loadingData() {
             map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
-                protocols = calProtocols(attacks, map.getBounds());
-                numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
+                attackTypes = calProtocols(attacks, map.getBounds());
+                numAttacks = attackTypes[4] + attackTypes[5] + attackTypes[6];
 
-                numTCP = protocols["TCP"];
-                numICP = protocols["ICMP"];
-                numUDP = protocols["UDP"];
+                numTCP = protocols[4];
+                numICP = protocols[5];
+                numUDP = protocols[6];
 
                 document.getElementById("tcp").innerHTML = numTCP;
                 document.getElementById("idp").innerHTML = numICP;
                 document.getElementById("udp").innerHTML = numUDP;
+                
+                x = Object.keys(attackTypes);
+                x.unshift("mag")
+                y = Object.values(attackTypes);
+                y.unshift("#")
 
                 x = Object.keys(numProtocols);
                 x.unshift("mag")
