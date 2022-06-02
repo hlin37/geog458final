@@ -39,7 +39,7 @@
             color: orange;
             font-size: 50px;
         }
-/* 
+
         #idp {
             margin: 0;
             text-align: center;
@@ -52,7 +52,7 @@
             text-align: center;
             color: orange;
             font-size: 50px;
-        } */
+        }
 
         #protocols-chart {
             top: 20px;
@@ -74,6 +74,10 @@
         <div id="count" class="card">
             <h5 id="desc"> # Earthquakes in the displaying region</h5>
             <p id="tcp"></p>
+            <h5 id="desc"> # Earthquakes in the displaying region</h5>
+            <p id="idp"></p>
+            <h5 id="desc"> # Earthquakes in the displaying region</h5>
+            <p id="udp"></p>
         </div>
         <div id="protocols-chart"></div>
 
@@ -192,8 +196,8 @@
                 console.log(protocols["TCP"]);
 
                 document.getElementById("tcp").innerHTML = numTCP;
-                //document.getElementById("idp").innerHTML = numICP;
-                //document.getElementById("udp").innerHTML = numUDP;
+                document.getElementById("idp").innerHTML = numICP;
+                document.getElementById("udp").innerHTML = numUDP;
 
                 // add "proot" to the beginning of the x variable - the magnitude, and "#" to the beginning of the y variable - the number of earthquake of similar magnitude.
                 x = Object.keys(protocols);
@@ -257,8 +261,8 @@
                 numUDP = protocols["UDP"];
 
                 document.getElementById("tcp").innerHTML = numTCP;
-                //document.getElementById("idp").innerHTML = numICP;
-                //document.getElementById("udp").innerHTML = numUDP;
+                document.getElementById("idp").innerHTML = numICP;
+                document.getElementById("udp").innerHTML = numUDP;
 
                 x = Object.keys(protocols);
                 x.unshift("mag")
