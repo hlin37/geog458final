@@ -181,6 +181,7 @@
                         x: 'proto',     //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
                         columns: [x, y],
                         type: 'bar',
+                        labels: true,
                         colors: {
                         '#': (d) => {
                             return colors[d["x"]];
@@ -211,7 +212,6 @@
                     legend: {
                         show: false
                     },
-
                     bindto: '#protocols-chart'
 
                 });
