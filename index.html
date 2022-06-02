@@ -71,6 +71,13 @@
             CyberAttacks Vizualized
             <span id="reset"><a href="#">reset</a></span>
         </div>
+        <div>
+            <div id="count" class="card">
+            <h5 id="desc"> # Earthquakes in the displaying region</h5>
+            <p id="tcp"></p>
+            <p id="idp"></p>
+            <p id="ump"></p>
+        </div>
         <div id="protocols-chart"></div>
 
         <div id="footer">
@@ -244,9 +251,12 @@
             //load data to the map as new layers.
             //map.on('load', function loadingData() {
             map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
-                attackTypes = calProtocols(attacks, map.getBounds());
-                numAttacks = attackTypes[4] + attackTypes[5] + attackTypes[6];
-
+                protocols = calProtocols(attacks, map.getBounds());
+                numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
+                document.getElementById("tcp").innerHTML = protocols["TCP"]
+                document.getElementById("imp").innerHTML = protocols["ICMP"]
+                document.getElementBYID("udp").innerHTML = protocols["UDP"]
+                
                 x = Object.keys(attackTypes);
                 x.unshift("mag")
                 y = Object.values(attackTypes);
