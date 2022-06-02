@@ -103,7 +103,10 @@
         const protos = ["UDP", "TCP", "ICMP"],
             colors = ['rgb(181,126,220)', 'rgb(103,169,207)', 'rgb(1,108,89)']
 
-        let chart = null;
+        let chart = null,
+            numTCP = 0;
+            numICP = 0;
+            numUDP = 0;
             // protocols = {};
 
         async function geojsonFetch() {
@@ -185,9 +188,13 @@
                 
                 numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
 
-                document.getElementById("tcp").innerHTML = protocols["TCP"]
-                document.getElementById("imp").innerHTML = protocols["ICMP"]
-                document.getElementBYID("udp").innerHTML = protocols["UDP"]
+                numTCP = protocols["TCP"];
+                numICP = protocols["ICMP"];
+                numUDP = protocols["UDP"];
+
+                document.getElementById("tcp").innerHTML = numTCP
+                document.getElementById("imp").innerHTML = numICP
+                document.getElementBYID("udp").innerHTML = numUDP
 
 
                 //***** COMMENTS BY STEVEN: This `earthquake-count` is referring to the HTML element
@@ -253,10 +260,15 @@
             map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
                 protocols = calProtocols(attacks, map.getBounds());
                 numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
-                document.getElementById("tcp").innerHTML = protocols["TCP"]
-                document.getElementById("imp").innerHTML = protocols["ICMP"]
-                document.getElementBYID("udp").innerHTML = protocols["UDP"]
-                
+
+                numTCP = protocols["TCP"];
+                numICP = protocols["ICMP"];
+                numUDP = protocols["UDP"];
+
+                document.getElementById("tcp").innerHTML = numTCP
+                document.getElementById("imp").innerHTML = numICP
+                document.getElementBYID("udp").innerHTML = numUDP
+
                 x = Object.keys(attackTypes);
                 x.unshift("mag")
                 y = Object.values(attackTypes);
