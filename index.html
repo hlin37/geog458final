@@ -190,19 +190,10 @@
                 numUDP = protocols["UDP"];
 
                 console.log(protocols["TCP"]);
-                console.log(protocols[4]);
 
                 document.getElementById("tcp").innerHTML = numTCP;
                 //document.getElementById("idp").innerHTML = numICP;
                 //document.getElementById("udp").innerHTML = numUDP;
-
-
-                //***** COMMENTS BY STEVEN: This `earthquake-count` is referring to the HTML element
-                //***** with the id `earthquake-count` in the example webpage.
-                //***** `document.getElementById()` is a built-in basic JS function to get specific HTML elements.
-                //***** There are other similar functions such as `document.getElementsByClass()`
-                // // update the content of the element earthquake-count.
-                // document.getElementById("earthquake-count").innerHTML = numEarthquakes;
 
                 // add "proot" to the beginning of the x variable - the magnitude, and "#" to the beginning of the y variable - the number of earthquake of similar magnitude.
                 x = Object.keys(protocols);
@@ -258,20 +249,20 @@
             //load data to the map as new layers.
             //map.on('load', function loadingData() {
             map.on('idle', () => { //simplifying the function statement: arrow with brackets to define a function
-                attackTypes = calProtocols(attacks, map.getBounds());
-                numAttacks = attackTypes[4] + attackTypes[5] + attackTypes[6];
+                protocols = calProtocols(attacks, map.getBounds());
+                //numAttacks = attackTypes[4] + attackTypes[5] + attackTypes[6];
 
-                numTCP = protocols[4];
-                numICP = protocols[5];
-                numUDP = protocols[6];
+                numTCP = protocols["TCP"];
+                numICP = protocols["ICMP"];
+                numUDP = protocols["UDP"];
 
                 document.getElementById("tcp").innerHTML = numTCP;
                 //document.getElementById("idp").innerHTML = numICP;
                 //document.getElementById("udp").innerHTML = numUDP;
 
-                x = Object.keys(attackTypes);
+                x = Object.keys(protocols);
                 x.unshift("mag")
-                y = Object.values(attackTypes);
+                y = Object.values(protocols);
                 y.unshift("#")
 
                 // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
