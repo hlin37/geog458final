@@ -33,6 +33,27 @@
             width: 100%;
         }
 
+        #tcp {
+            margin: 0;
+            text-align: center;
+            color: orange;
+            font-size: 50px;
+        }
+
+        #imp {
+            margin: 0;
+            text-align: center;
+            color: orange;
+            font-size: 50px;
+        }
+
+        #udp {
+            margin: 0;
+            text-align: center;
+            color: orange;
+            font-size: 50px;
+        }
+
         #protocols-chart {
             top: 20px;
         }
@@ -154,8 +175,12 @@
                 //     'UDP': 5
                 // }
 
-                // enumerate the number of earthquakes.
-                //numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
+                
+                numProtocols = protocols["TCP"] + protocols["UDP"] + protocols["ICMP"];
+
+                document.getElementById("tcp").innerHTML = protocols["TCP"]
+                document.getElementById("imp").innerHTML = protocols["ICMP"]
+                document.getElementBYID("udp").innerHTML = protocols["UDP"]
 
 
                 //***** COMMENTS BY STEVEN: This `earthquake-count` is referring to the HTML element
