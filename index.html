@@ -217,7 +217,7 @@
                             title: function (d) { return 'Data ' + d; },
                             value: function (protocols, id) {
                                 var format = id === 'TCP' ? d3.format(',') : d3.format('$');
-                                return format(value);
+                                return format(protocols);
                             }
                 //            value: d3.format(',') // apply this format to both y and y2
                         }
