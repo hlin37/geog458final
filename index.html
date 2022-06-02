@@ -236,18 +236,6 @@
                     legend: {
                         show: false
                     },
-
-                    tooltip: {
-                        format: {
-                            title: function (d) { return 'Data ' + d; },
-                            value: function (value, protocols, id) {
-                                var format = id === 'TCP' ? d3.format(',') : d3.format('$');
-                                console.log(format);
-                                return format(value);
-                            }
-                //            value: d3.format(',') // apply this format to both y and y2
-                        }
-                    },
                     bindto: '#protocols-chart'
 
                 });
