@@ -39,7 +39,7 @@
             color: orange;
             font-size: 50px;
         }
-
+/* 
         #idp {
             margin: 0;
             text-align: center;
@@ -52,7 +52,7 @@
             text-align: center;
             color: orange;
             font-size: 50px;
-        }
+        } */
 
         #protocols-chart {
             top: 20px;
@@ -75,8 +75,8 @@
             <div id="count" class="card">
             <h5 id="desc"> # Earthquakes in the displaying region</h5>
             <p id="tcp"></p>
-            <p id="idp"></p>
-            <p id="udp"></p>
+            <!-- <p id="idp"></p>
+            <p id="udp"></p> -->
         </div>
         <div id="protocols-chart"></div>
 
@@ -193,8 +193,8 @@
                 numUDP = protocols["UDP"];
 
                 document.getElementById("tcp").innerHTML = numTCP;
-                document.getElementById("idp").innerHTML = numICP;
-                document.getElementById("udp").innerHTML = numUDP;
+                //document.getElementById("idp").innerHTML = numICP;
+                //document.getElementById("udp").innerHTML = numUDP;
 
 
                 //***** COMMENTS BY STEVEN: This `earthquake-count` is referring to the HTML element
@@ -266,17 +266,12 @@
                 numUDP = protocols[6];
 
                 document.getElementById("tcp").innerHTML = numTCP;
-                document.getElementById("idp").innerHTML = numICP;
-                document.getElementById("udp").innerHTML = numUDP;
-                
+                //document.getElementById("idp").innerHTML = numICP;
+                //document.getElementById("udp").innerHTML = numUDP;
+
                 x = Object.keys(attackTypes);
                 x.unshift("mag")
                 y = Object.values(attackTypes);
-                y.unshift("#")
-
-                x = Object.keys(numProtocols);
-                x.unshift("mag")
-                y = Object.values(numProtocols);
                 y.unshift("#")
 
                 // after finishing each map reaction, the chart will be rendered in case the current bbox changes.
