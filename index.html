@@ -396,9 +396,24 @@
                         format: {
                             title: function (d) {
                                 return 'Attack' + d;
+                            },
+                            name: function (name, value, ratio, id) {
+                                console.log(name)
+                                console.log(value)
+                                console.log(ratio)
+                                console.log(id)
+                                return "Hello"
+                            },
+                            value: function (name, value, ratio) {
+                                console.log(name)
+                                console.log(value)
+                                console.log(ratio)
+                                console.log(id)
+                                return "stuff"
                             }
                         }
                     },
+
                     bar: {
                         width: {
                             ratio: 0.5
