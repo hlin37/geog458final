@@ -261,7 +261,7 @@
                             'id': layerID,
                             'type': 'circle',
                             'source': 'aws_honeypot',
-                            filter: ['has', 'proto'],
+                            filter: ['==', 'proto'],
                             paint: {
                                 'circle-color': [
                                     'match',
