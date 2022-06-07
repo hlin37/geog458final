@@ -294,14 +294,17 @@
                     },
 
                     data: {
-                    x: 'proto', //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
-                    columns: [x, y],
-                    type: 'bar',
-                    colors: {
-                        '#': (d) => {
-                                return colors[d["x"]];
-                            }
-                    }
+                        x: 'proto', //***** COMMENTS BY STEVEN: You should use the correct field name in the geojson data
+                        columns: [x, y],
+                        type: 'bar',
+                        colors: {
+                            '#': (d) => {
+                                    return colors[d["x"]];
+                                }
+                        },
+                        onclick: function (d) {
+                            console.log(d);
+                        }
                     },
                     axis: {
                         y: {
