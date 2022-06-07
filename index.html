@@ -303,11 +303,7 @@
                                 'visibility',
                                 e.target.checked ? 'visible' : 'none'
                             );
-                            d3.selectAll("protocols-chart .c3-shape").style("opacity" , 0.1)
-                            var k = "#chart1 .c3-shape-" + e.index;
-                            //make the clicked bar opacity 1
-                            d3.selectAll(k).style("opacity", 1)
-                            event.stopPropagation()
+                            d3.selectAll("protocols-chart").style("opacity" , 0.1)
                         });
                     }
                 }
