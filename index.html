@@ -191,7 +191,7 @@
     </div>
     <div id="map"></div>
     <nav id="filter-group" class="filter-group"></nav>
-    
+
     <script>
         mapboxgl.accessToken =
             'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
@@ -255,7 +255,7 @@
                 });
 
                 for (const feature of attacks.features) {
-                    const layerID = "" + attacks.features.properties.proto
+                    const layerID = "" + feature.properties.proto
                     if (!map.getLayer(layerID)) {
                         map.addLayer({
                             'id': layerID,
